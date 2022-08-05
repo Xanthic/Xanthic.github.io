@@ -1,0 +1,49 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AndroidX
+
+## Description
+
+...
+
+- [Official Documentation](https://developer.android.com/reference/androidx/collection/LruCache)
+
+## Installation
+
+<Tabs groupId="dependency">
+<TabItem value="gradle-groovy" label="Gradle - Groovy">
+
+```groovy
+implementation 'io.github.xanthic.cache:cache-provider-androidx'
+```
+
+</TabItem>
+<TabItem value="gradle-kotlin" label="Gradle - Kotlin DSL">
+
+```kotlin
+implementation("io.github.xanthic.cache:cache-provider-androidx")
+```
+
+</TabItem>
+<TabItem value="maven" label="Maven">
+
+```xml
+<dependency>
+  <groupId>io.github.xanthic.cache</groupId>
+  <artifactId>cache-provider-androidx</artifactId>
+</dependency>
+```
+
+</TabItem>
+</Tabs>
+
+> Versions are managed by the `xanthic-bom`, see [here](../getting-started/installation)
+
+## Usage
+
+```java
+Cache<String, Integer> cache = CacheApi.create(spec -> {
+    spec.provider(new AndroidLruProvider());
+});
+```

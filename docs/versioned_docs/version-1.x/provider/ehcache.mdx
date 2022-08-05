@@ -1,0 +1,49 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# EHCache 3
+
+## Description
+
+...
+
+- [Official Documentation](https://www.ehcache.org/documentation/3.0/index.html)
+
+## Installation
+
+<Tabs groupId="dependency">
+<TabItem value="gradle-groovy" label="Gradle - Groovy">
+
+```groovy
+implementation 'io.github.xanthic.cache:cache-provider-ehcache'
+```
+
+</TabItem>
+<TabItem value="gradle-kotlin" label="Gradle - Kotlin DSL">
+
+```kotlin
+implementation("io.github.xanthic.cache:cache-provider-ehcache")
+```
+
+</TabItem>
+<TabItem value="maven" label="Maven">
+
+```xml
+<dependency>
+  <groupId>io.github.xanthic.cache</groupId>
+  <artifactId>cache-provider-ehcache</artifactId>
+</dependency>
+```
+
+</TabItem>
+</Tabs>
+
+> Versions are managed by the `xanthic-bom`, see [here](../getting-started/installation)
+
+## Usage
+
+```java
+Cache<String, Integer> cache = CacheApi.create(spec -> {
+    spec.provider(new EhcacheProvider());
+});
+```

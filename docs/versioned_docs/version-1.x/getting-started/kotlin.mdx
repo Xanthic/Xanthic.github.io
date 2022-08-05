@@ -1,0 +1,61 @@
+---
+sidebar_position: 11
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Koltin
+
+The `xanthic-kotlin` module provides extension functions for the CreateCache / CacheApiSpec that allows for some cleaner syntax.
+
+## Installation
+
+<Tabs groupId="dependency">
+<TabItem value="gradle-groovy" label="Gradle - Groovy">
+
+```groovy
+dependencies {
+    implementation 'io.github.xanthic.cache:cache-kotlin'
+}
+```
+
+</TabItem>
+<TabItem value="gradle-kotlin" label="Gradle - Kotlin DSL">
+
+```kotlin
+dependencies {
+    implementation("io.github.xanthic.cache:cache-kotlin")
+}
+```
+
+</TabItem>
+<TabItem value="maven" label="Maven">
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>io.github.xanthic.cache</groupId>
+        <artifactId>cache-kotlin</artifactId>
+        <version>0.1.0</version>
+    </dependency>
+</dependencies>
+```
+
+</TabItem>
+</Tabs>
+
+## Examples
+
+```kotlin
+val cache = createCache<String, Int> {
+    maxSize = 128
+    expiryType = ExpiryType.POST_ACCESS
+    expiryTime = Duration.ofMillis(420)
+    removalListener { key, value, cause ->
+        if (cause.isEviction) {
+            println("evicted: $key:$value")
+        }
+    }
+}
+```
