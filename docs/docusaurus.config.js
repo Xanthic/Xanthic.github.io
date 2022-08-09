@@ -19,7 +19,7 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
-  
+
   presets: [
     [
       'classic',
@@ -28,11 +28,11 @@ const config = {
         docs: {
           routeBasePath: '/',
           includeCurrentVersion: false,
-          lastVersion: '1.x',
+          lastVersion: '0.x',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           versions: {
-            '1.x': {
+            '0.x': {
               banner: 'none',
               badge: false,
             }
