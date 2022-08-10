@@ -4,8 +4,11 @@ sidebar_position: 11
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Alert from '@mui/material/Alert';
 
 # Kotlin
+
+> added in: v0.1.0
 
 The `xanthic-kotlin` module provides extension functions for the CreateCache / CacheApiSpec that allows for some cleaner syntax.
 
@@ -37,7 +40,6 @@ dependencies {
     <dependency>
         <groupId>io.github.xanthic.cache</groupId>
         <artifactId>cache-kotlin</artifactId>
-        <version>0.1.0</version>
     </dependency>
 </dependencies>
 ```
@@ -45,7 +47,11 @@ dependencies {
 </TabItem>
 </Tabs>
 
-## Examples
+<Alert severity="info" variant="outlined">Versions are managed by the <a href="/getting-started/installation">xanthic-bom</a>, make sure to add it to your project!</Alert>
+
+## createCache
+
+> added in: v0.1.0
 
 ```kotlin
 val cache = createCache<String, Int> {

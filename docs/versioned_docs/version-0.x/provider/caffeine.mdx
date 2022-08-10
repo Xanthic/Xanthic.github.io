@@ -1,7 +1,10 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Alert from '@mui/material/Alert';
 
 # Caffeine
+
+> added in: v0.1.0
 
 ## Description
 
@@ -38,9 +41,21 @@ implementation("io.github.xanthic.cache:cache-provider-caffeine")
 </TabItem>
 </Tabs>
 
-> Versions are managed by the `xanthic-bom`, see [here](../getting-started/installation)
+<Alert severity="info" variant="outlined">Versions are managed by the <a href="/getting-started/installation">xanthic-bom</a>!</Alert>
 
 ## Usage
+
+### Default
+
+```java
+CacheApiSettings.getInstance().setDefaultCacheProvider(new CaffeineProvider());
+
+Cache<String, Integer> cache = CacheApi.create(spec -> {
+  // if spec.provider is not set the default cache provider will be used
+});
+```
+
+### Spec
 
 ```java
 Cache<String, Integer> cache = CacheApi.create(spec -> {
