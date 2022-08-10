@@ -15,7 +15,7 @@ function getDocusaurusColorMode() {
 }
 
 export default function App(props: any): JSX.Element {
-  const [mode, setMode] = React.useState<PaletteMode>(getDocusaurusColorMode() == 'dark' ? 'dark' : 'light');
+  const [mode, setMode] = React.useState<PaletteMode>('dark');
 
   // keep colorMode syncronized with docusaurus
   useEffect(() => {
