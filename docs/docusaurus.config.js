@@ -42,7 +42,7 @@ const config = {
               badge: false,
             }
           },
-          editUrl: 'https://github.com/Xanthic/Xanthic.github.io/tree/master/docs/',
+          editUrl: 'https://github.com/Xanthic/Xanthic.github.io/tree/main/docs/',
         },
         theme: {
           customCss: require.resolve('./static/css/theme.css'),
