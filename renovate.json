@@ -25,7 +25,7 @@
     "assignees": ["iProdigy", "PhilippHeuer"],
     "labels": ["dependencies", "security"]
   },
-  "baseBranches": ["master"],
+  "baseBranches": ["main"],
   "regexManagers": [
     {
       "fileMatch": [
