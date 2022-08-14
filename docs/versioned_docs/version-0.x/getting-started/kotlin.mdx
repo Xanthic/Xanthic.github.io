@@ -5,6 +5,7 @@ sidebar_position: 11
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Alert from '@mui/material/Alert';
+import { JavaDependency } from '@philippheuer/docusaurus-components';
 
 # Kotlin
 
@@ -14,38 +15,7 @@ The `xanthic-kotlin` module provides extension functions for the CreateCache / C
 
 ## Installation
 
-<Tabs groupId="dependency">
-<TabItem value="gradle-groovy" label="Gradle - Groovy">
-
-```groovy
-dependencies {
-    implementation 'io.github.xanthic.cache:cache-kotlin'
-}
-```
-
-</TabItem>
-<TabItem value="gradle-kotlin" label="Gradle - Kotlin DSL">
-
-```kotlin
-dependencies {
-    implementation("io.github.xanthic.cache:cache-kotlin")
-}
-```
-
-</TabItem>
-<TabItem value="maven" label="Maven">
-
-```xml
-<dependencies>
-    <dependency>
-        <groupId>io.github.xanthic.cache</groupId>
-        <artifactId>cache-kotlin</artifactId>
-    </dependency>
-</dependencies>
-```
-
-</TabItem>
-</Tabs>
+<JavaDependency group="io.github.xanthic.cache" name="cache-kotlin" scope="implementation" />
 
 <Alert severity="info" variant="outlined">Versions are managed by the <a href="/getting-started/installation">xanthic-bom</a>!</Alert>
 

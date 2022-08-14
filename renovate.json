@@ -1,0 +1,41 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+      "config:base",
+      "github>whitesource/merge-confidence:beta",
+      "docker:enableMajor",
+      ":prHourlyLimitNone",
+      ":prConcurrentLimitNone",
+      ":disableDependencyDashboard",
+      ":separateMultipleMajorReleases",
+      ":combinePatchMinorReleases",
+      ":pinVersions"
+  ],
+  "assignees": [],
+  "branchPrefix": "chore/dependencies/",
+  "digest": {
+    "enabled": false
+  },
+  "labels": [
+    "dependencies"
+  ],
+  "rebaseWhen": "behind-base-branch",
+  "reviewers": ["iProdigy", "PhilippHeuer"],
+  "vulnerabilityAlerts": {
+    "assignees": ["iProdigy", "PhilippHeuer"],
+    "labels": ["dependencies", "security"]
+  },
+  "baseBranches": ["master"],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        ".*\\.mdx$"
+      ],
+      "datasourceTemplate": "maven",
+      "depNameTemplate": "{{{group}}}:{{{name}}}",
+      "matchStrings": [
+        "<JavaDependency group=\"(?<group>.*?)\" name=\"(?<name>.*?)\" version=\"(?<currentValue>.*?)\".*/>"
+      ]
+    }
+  ]
+}
