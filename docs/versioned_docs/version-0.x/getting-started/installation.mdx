@@ -4,6 +4,7 @@ sidebar_position: 1
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import { JavaDependency } from '@philippheuer/docusaurus-components';
 
 # Installation
 
@@ -15,95 +16,24 @@ The `cache-bom` will ensure that all xanthic-components in your project use the 
 
 You will want to include the `xanthic-core` to code against this straightforward API and let users can choose whichever backing implementation they prefer!
 
-<Tabs groupId="dependency">
-<TabItem value="gradle-groovy" label="Gradle - Groovy">
+### Step 1: add the bom to your project:
 
-```groovy
-api platform("io.github.xanthic.cache:cache-bom:0.1.0")
-api "io.github.xanthic.cache:cache-core"
-```
+<JavaDependency group="io.github.xanthic.cache" name="cache-bom" version="0.1.0" bom="true" scope="api" />
 
-</TabItem>
-<TabItem value="gradle-kotlin" label="Gradle - Kotlin DSL">
+### Step 2: add the `cache-core` dependency:
 
-```kotlin
-api(platform("io.github.xanthic.cache:cache-bom:0.1.0"))
-api("io.github.xanthic.cache:cache-core")
-```
-
-</TabItem>
-<TabItem value="maven" label="Maven">
-
-```xml
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>io.github.xanthic.cache</groupId>
-            <artifactId>cache-bom</artifactId>
-            <version>0.1.0</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-
-<dependencies>
-    <dependency>
-        <groupId>io.github.xanthic.cache</groupId>
-        <artifactId>cache-core</artifactId>
-    </dependency>
-</dependencies>
-```
-
-</TabItem>
-</Tabs>
+<JavaDependency group="io.github.xanthic.cache" name="cache-core" scope="api" />
 
 ## Usage: For Application Developers
 
 As user of a library that is using xanthic, you will only need to specify the `bom` and pick your one or more implementations of your choice.
-See all supported implementations [here](/provider).
 
-This example shows how to include caffeine3:
+### Step 1: add the bom to your project:
 
-<Tabs groupId="dependency">
-<TabItem value="gradle-groovy" label="Gradle - Groovy">
+<JavaDependency group="io.github.xanthic.cache" name="cache-bom" version="0.1.0" bom="true" scope="implementation" />
 
-```groovy
-implementation platform("io.github.xanthic.cache:cache-bom:0.1.0")
-implementation "io.github.xanthic.cache:cache-provider-caffeine3"
-```
+### Step 2: add a cache-implementation of your choice:
 
-</TabItem>
-<TabItem value="gradle-kotlin" label="Gradle - Kotlin DSL">
+See all supported implementations [here](/provider)
 
-```kotlin
-implementation(platform("io.github.xanthic.cache:cache-bom:0.1.0"))
-implementation("io.github.xanthic.cache:cache-provider-caffeine3")
-```
-
-</TabItem>
-<TabItem value="maven" label="Maven">
-
-```xml
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>io.github.xanthic.cache</groupId>
-            <artifactId>cache-bom</artifactId>
-            <version>0.1.0</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-
-<dependencies>
-    <dependency>
-        <groupId>io.github.xanthic.cache</groupId>
-        <artifactId>cache-provider-caffeine3</artifactId>
-    </dependency>
-</dependencies>
-```
-
-</TabItem>
-</Tabs>
+<JavaDependency group="io.github.xanthic.cache" name="cache-provider-caffeine3" scope="implementation" />
