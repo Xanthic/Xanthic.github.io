@@ -1,6 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Alert from '@mui/material/Alert';
+import { JavaDependency } from '@philippheuer/docusaurus-components';
 
 # Caffeine 3
 
@@ -14,32 +15,7 @@ import Alert from '@mui/material/Alert';
 
 ## Installation
 
-<Tabs groupId="dependency">
-<TabItem value="gradle-groovy" label="Gradle - Groovy">
-
-```groovy
-implementation 'io.github.xanthic.cache:cache-provider-caffeine3'
-```
-
-</TabItem>
-<TabItem value="gradle-kotlin" label="Gradle - Kotlin DSL">
-
-```kotlin
-implementation("io.github.xanthic.cache:cache-provider-caffeine3")
-```
-
-</TabItem>
-<TabItem value="maven" label="Maven">
-
-```xml
-<dependency>
-  <groupId>io.github.xanthic.cache</groupId>
-  <artifactId>cache-provider-caffeine3</artifactId>
-</dependency>
-```
-
-</TabItem>
-</Tabs>
+<JavaDependency group="io.github.xanthic.cache" name="cache-provider-caffeine3" scope="implementation" />
 
 <Alert severity="info" variant="outlined">Versions are managed by the <a href="/getting-started/installation">xanthic-bom</a>!</Alert>
 
