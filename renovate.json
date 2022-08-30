@@ -43,6 +43,14 @@
       "matchPackageNames": ["io.github.xanthic.cache:cache-bom"],
       "automerge": true,
       "assignAutomerge": false
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchDatasources": ["npm"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "assignAutomerge": false
     }
   ],
   "platformAutomerge": true
