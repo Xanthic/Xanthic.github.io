@@ -8,8 +8,29 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# 
+#
 
-<img src={useBaseUrl('/img/logo-full.png')} width="100%" />
+<img src={useBaseUrl('/img/logo-full.png')} width="100%" alt="Xanthic logo" />
 
-TODO ...
+Xanthic is a straightforward API for in-memory caching on the JVM, via the facade pattern.
+
+Library developers can utilize Xanthic to [enable](/getting-started/installation#usage-for-library-developers) caching without marrying a single implementation.
+
+Application developers can utilize Xanthic to easily switch between different [backing implementations](/provider/) whenever desired.
+
+## Example Usage
+
+```java
+Cache<String, Integer> cache = CacheApi.create(spec -> {
+    spec.maxSize(2048L);
+    spec.expiryTime(Duration.ofMinutes(5L));
+    spec.expiryType(ExpiryType.POST_ACCESS);
+    spec.removalListener((key, value, cause) -> {
+        if (cause.isEviction()) {
+            // do something
+        }
+    });
+});
+```
+
+The methods defined on the `Cache` object can be found in the [Javadoc](https://javadoc.io/doc/io.github.xanthic.cache/cache-api/latest/io/github/xanthic/cache/api/Cache.html).

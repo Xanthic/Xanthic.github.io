@@ -9,7 +9,12 @@ import { JavaDependency } from '@philippheuer/docusaurus-components';
 
 ## Description
 
-...
+This provider uses Infinispan in local, volatile mode to fulfill the Xanthic `Cache` contract.
+
+Out of the box, Infinispan's distributed or scattered cache options are not (yet) supported.
+
+Note: Infinispan itself depends on Caffeine, so one can achieve a smaller binary by using Caffeine [instead](/provider/caffeine),
+if not also using other features of Infinispan.
 
 - [Official Documentation](https://infinispan.org/documentation/)
 

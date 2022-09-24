@@ -9,7 +9,11 @@ import { JavaDependency } from '@philippheuer/docusaurus-components';
 
 ## Description
 
-...
+This cache provider uses `LruCache` from the AndroidX library to fulfill the Xanthic `Cache` contract.
+
+Due to `LruCache` limitations, removal listeners will observe `RemovalCause.SIZE` on `Cache#clear` calls.
+
+Note: other Android-compatible implementations (e.g., [Cache2k](/provider/cache2k)) may yield better performance when entry expiration is enabled.
 
 - [Official Documentation](https://developer.android.com/reference/androidx/collection/LruCache)
 
@@ -18,6 +22,10 @@ import { JavaDependency } from '@philippheuer/docusaurus-components';
 <JavaDependency group="io.github.xanthic.cache" name="cache-provider-androidx" scope="implementation" />
 
 <Alert severity="info" variant="outlined">Versions are managed by the <a href="/getting-started/installation">xanthic-bom</a>!</Alert>
+
+<br/>
+
+<Alert severity="info" variant="outlined">AndroidX requires the <a href="https://developer.android.com/studio/build/dependencies#google-maven">Google Maven</a> repository.</Alert>
 
 ## Usage
 

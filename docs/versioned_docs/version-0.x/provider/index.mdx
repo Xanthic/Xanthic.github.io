@@ -4,15 +4,15 @@ import Alert from '@mui/material/Alert';
 
 Xanthic currently supports the following implementations:
 
-| Cache Provider | Provider Class | Maven Artifact | Discovery Order |
-| :-----: | :------: | :------: | :------: |
-| [AndroidX](./androidx) | `AndroidLruProvider` | `cache-provider-androidx` | 1 |
-| [Cache2k](./cache2k) | `Cache2kProvider` | `cache-provider-cache2k` | 4 |
-| [Caffeine](./caffeine) | `CaffeineProvider` | `cache-provider-caffeine` | 3 |
-| [Caffeine3](./caffeine3) | `Caffeine3Provider` | `cache-provider-caffeine3` | 2 |
-| [Ehcache v3 (heap)](./ehcache) | `EhcacheProvider` | `cache-provider-ehcache` | 8 |
-| [ExpiringMap](./expiringmap) | `ExpiringMapProvider` | `cache-provider-expiringmap` | 6 |
-| [Guava](./guava) | `GuavaProvider` | `cache-provider-guava` | 7 |
-| [Infinispan (heap)](./infinispan) | `InfinispanProvider` | `cache-provider-infinispan` | 5 |
+| Cache Provider | Provider Class | Maven Artifact | Discovery Order | Android Support |
+| :-----: | :------: | :------: | :------: | :------: |
+| [AndroidX](./androidx) | `AndroidLruProvider` | `cache-provider-androidx` | 1 | ✔️ |
+| [Cache2k](./cache2k) | `Cache2kProvider` | `cache-provider-cache2k` | 4 | ✔️ |
+| [Caffeine](./caffeine) | `CaffeineProvider` | `cache-provider-caffeine` | 3 | ❌ |
+| [Caffeine3](./caffeine3) | `Caffeine3Provider` | `cache-provider-caffeine3` | 2 | ❌ |
+| [Ehcache v3 (heap)](./ehcache) | `EhcacheProvider` | `cache-provider-ehcache` | 8 | ❌ |
+| [ExpiringMap](./expiringmap) | `ExpiringMapProvider` | `cache-provider-expiringmap` | 6 | ❔ |
+| [Guava](./guava) | `GuavaProvider` | `cache-provider-guava` | 7 | ✔️ |
+| [Infinispan (heap)](./infinispan) | `InfinispanProvider` | `cache-provider-infinispan` | 5 | ❌ |
 
 <Alert severity="info" variant="outlined">When multiple providers are present in the classpath, the first one (sorted by <b>Discovery Order</b>) will be registered as default cache provider.</Alert>

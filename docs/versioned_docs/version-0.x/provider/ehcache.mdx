@@ -3,13 +3,19 @@ import TabItem from '@theme/TabItem';
 import Alert from '@mui/material/Alert';
 import { JavaDependency } from '@philippheuer/docusaurus-components';
 
-# EHCache 3
+# Ehcache 3
 
 > added in: v0.1.0
 
 ## Description
 
-...
+This provider uses Ehcache v3 in local heap memory mode.
+
+When using this provider, specifying `ICacheSpec#maxSize` is highly recommended.
+
+Due to limitations of the Ehcache interface, additional locking is introduced
+to comply with the Xanthic `Cache` contract in a thread-safe manner.
+As a result, multi-threaded throughput performance will not be as great as other options.
 
 - [Official Documentation](https://www.ehcache.org/documentation/3.0/index.html)
 
