@@ -4,7 +4,7 @@ The documentation is generated from markdown files using [Docusaurus 2](https://
 
 ## Build
 
-You can generate the documentaton locally to inspect your changes using:
+You can generate the documentation locally to inspect your changes using:
 
 - run locally: `yarn start`
 - build locally: `yarn build`

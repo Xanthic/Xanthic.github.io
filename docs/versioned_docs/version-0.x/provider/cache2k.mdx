@@ -9,14 +9,19 @@ import { JavaDependency } from '@philippheuer/docusaurus-components';
 
 ## Description
 
-...
+This provider uses the [high-performance](https://cache2k.org/benchmarks.html) Cache2k library to fulfill the Xanthic `Cache` contract.
+
+In addition, this provider can be used on [Android](https://cache2k.org/docs/latest/user-guide.html#android).
+
+However, `ExpiryType.POST_ACCESS` is [imprecisely](https://cache2k.org/docs/latest/apidocs/cache2k-api/org/cache2k/Cache2kBuilder.html#idleScanTime(java.time.Duration)) handled,
+so time-based eviction could happen early or late (but will be "correct," on average).
+Consider using the [Caffeine](/provider/caffeine) provider if more precise time-based (post-access) eviction is desired.
 
 - [Official Documentation](https://cache2k.org)
 
 ## Installation
 
 <JavaDependency group="io.github.xanthic.cache" name="cache-provider-cache2k" scope="implementation" />
-
 
 <Alert severity="info" variant="outlined">Versions are managed by the <a href="/getting-started/installation">xanthic-bom</a>!</Alert>
 

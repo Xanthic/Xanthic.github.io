@@ -9,7 +9,11 @@ import { JavaDependency } from '@philippheuer/docusaurus-components';
 
 ## Description
 
-...
+This cache provider uses the popular Guava library.
+
+For server-side users, [Caffeine](/provider/caffeine) is [recommended](https://github.com/google/guava/blob/master/guava/src/com/google/common/cache/CacheBuilder.java#L46) instead.
+
+For Android users, Google [suggests](https://github.com/google/guava/wiki/Android#specifics) using `LruCache` [instead](/provider/androidx).
 
 - [Official Documentation](https://github.com/google/guava/wiki/CachesExplained)
 

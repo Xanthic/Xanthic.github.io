@@ -9,7 +9,10 @@ import { JavaDependency } from '@philippheuer/docusaurus-components';
 
 ## Description
 
-...
+This provider uses the [high-performance](https://github.com/ben-manes/caffeine/wiki/Benchmarks) Caffeine library to fulfill the Xanthic `Cache` contract.
+
+This module supports Java 8, but not [Android](https://github.com/ben-manes/caffeine/wiki/Guava#android--gwt-compatibility).
+If using Java 11+, one can switch to the Caffeine3 provider [instead](/provider/caffeine3).
 
 - [Official Documentation](https://github.com/ben-manes/caffeine/wiki)
 
