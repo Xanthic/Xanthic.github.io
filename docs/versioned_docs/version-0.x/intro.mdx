@@ -20,6 +20,8 @@ Application developers can utilize Xanthic to easily switch between different [b
 
 ## Example Usage
 
+Create a cache (with `String` keys and `Integer` values) that can hold up to 2048 elements, where entries expire 5 minutes following their latest access, and removed entries notify a specific event listener:
+
 ```java
 Cache<String, Integer> cache = CacheApi.create(spec -> {
     spec.maxSize(2048L);
