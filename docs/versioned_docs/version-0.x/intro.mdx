@@ -4,9 +4,10 @@ sidebar_label: Home
 slug: /
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import Alert from "@mui/material/Alert";
 
 # 
 
@@ -14,17 +15,26 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 Xanthic is a straightforward API for in-memory caching on the JVM, via the facade pattern.
 
-Library developers can utilize Xanthic to [enable](/getting-started/installation#usage-for-library-developers) caching without marrying a single implementation.
+- Library developers can utilize Xanthic to [enable](/getting-started/installation#usage-for-library-developers) caching without marrying a single implementation
+- Application developers can utilize Xanthic to easily switch between different [backing implementations](/provider/) whenever desired
 
-Application developers can utilize Xanthic to easily switch between different [backing implementations](/provider/) whenever desired.
+## Usage Example
 
-## Example Usage
+### Create Cache
+
+Create a [cache](https://javadoc.io/doc/io.github.xanthic.cache/cache-api/latest/io/github/xanthic/cache/api/Cache.html) (with `String` keys and `Integer` values)
+that can hold [up to](https://javadoc.io/doc/io.github.xanthic.cache/cache-api/latest/io/github/xanthic/cache/api/ICacheSpec.html#maxSize()) 2048 elements,
+where entries [expire](https://javadoc.io/doc/io.github.xanthic.cache/cache-api/latest/io/github/xanthic/cache/api/ICacheSpec.html#expiryType()) 5 minutes following their latest access,
+and removed entries notify a specific event [listener](https://javadoc.io/doc/io.github.xanthic.cache/cache-api/latest/io/github/xanthic/cache/api/ICacheSpec.html#removalListener()):
+
+<Tabs>
+  <TabItem value="java" label="Java" default>
 
 ```java
 Cache<String, Integer> cache = CacheApi.create(spec -> {
     spec.maxSize(2048L);
     spec.expiryTime(Duration.ofMinutes(5L));
-    spec.expiryType(ExpiryType.POST_ACCESS);
+    spec.expiryType(ExpiryType.POST_ACCESS); // or ExpiryType.POST_WRITE
     spec.removalListener((key, value, cause) -> {
         if (cause.isEviction()) {
             // do something
@@ -33,4 +43,34 @@ Cache<String, Integer> cache = CacheApi.create(spec -> {
 });
 ```
 
-The methods defined on the `Cache` object can be found in the [Javadoc](https://javadoc.io/doc/io.github.xanthic.cache/cache-api/latest/io/github/xanthic/cache/api/Cache.html).
+  </TabItem>
+  <TabItem value="kotlin" label="Kotlin">
+
+```kotlin
+val cache = createCache<String, Int> {
+    maxSize = 2048
+    expiryTime = Duration.ofMinutes(5)
+    expiryType = ExpiryType.POST_ACCESS // or ExpiryType.POST_WRITE
+    removalListener { key, value, cause ->
+        if (cause.isEviction) {
+            // do something
+        }
+    }
+}
+```
+
+<Alert severity="info" variant="outlined">
+    <b>Kotlin</b> users can enjoy this more idiomatic syntax via the <a href="/getting-started/kotlin">extensions module</a>.
+</Alert>
+
+  </TabItem>
+</Tabs>
+
+Since `CacheApiSpec#provider(CacheProvider)` was not specified, the <b>default cache provider</b> will be used.
+
+### Default Cache Provider
+
+* Application developers [should](/getting-started/installation#usage-for-application-developers) add at least one `cache-provider-𝑥` module to their project <sup>(or create their own)</sup>
+* When there is only one cache provider registered, it will automatically become the [default cache provider](https://javadoc.io/doc/io.github.xanthic.cache/cache-core/latest/io/github/xanthic/cache/core/CacheApiSettings.html#getDefaultCacheProvider())
+* When there are multiple cache provider modules installed, the default will be selected according to the [discovery order](/provider/) <sup>(but it is not recommended to rely on this order)</sup>
+* Users can explicitly define which cache provider should be used as the default by calling [CacheApiSettings](https://javadoc.io/doc/io.github.xanthic.cache/cache-core/latest/io/github/xanthic/cache/core/CacheApiSettings.html#setDefaultCacheProvider(io.github.xanthic.cache.api.CacheProvider)). This will override whatever default was chosen from the discovery order
