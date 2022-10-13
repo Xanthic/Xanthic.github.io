@@ -49,8 +49,8 @@ Cache<String, Integer> cache = CacheApi.create(spec -> {
 ```kotlin
 val cache = createCache<String, Int> {
     maxSize = 2048
-    expiryType = ExpiryType.POST_ACCESS // or ExpiryType.POST_WRITE
     expiryTime = Duration.ofMinutes(5)
+    expiryType = ExpiryType.POST_ACCESS // or ExpiryType.POST_WRITE
     removalListener { key, value, cause ->
         if (cause.isEviction) {
             // do something
@@ -60,7 +60,7 @@ val cache = createCache<String, Int> {
 ```
 
 <Alert severity="info" variant="outlined">
-    <b>Kotlin</b> users can enjoy <a href="/getting-started/kotlin#createcache">more idiomatic syntax</a> via the extensions module!
+    <b>Kotlin</b> users can enjoy this more idiomatic syntax via the <a href="/getting-started/kotlin">extensions module</a>.
 </Alert>
 
   </TabItem>
@@ -70,7 +70,7 @@ Since `CacheApiSpec#provider(CacheProvider)` was not specified, the <b>default c
 
 ### Default Cache Provider
 
-* Application developers should add at least one `cache-provider-x` [module](/provider/) to their project <sup>(or create their own)</sup>
+* Application developers [should](/getting-started/installation#usage-for-application-developers) add at least one `cache-provider-𝑥` module to their project <sup>(or create their own)</sup>
 * When there is only one cache provider registered, it will automatically become the [default cache provider](https://javadoc.io/doc/io.github.xanthic.cache/cache-core/latest/io/github/xanthic/cache/core/CacheApiSettings.html#getDefaultCacheProvider())
-* When there are multiple cache provider modules installed, the default will be selected according to the [discovery order](/provider/) <br /><sup>(but it is not recommended to rely on this order)</sup>
+* When there are multiple cache provider modules installed, the default will be selected according to the [discovery order](/provider/) <sup>(but it is not recommended to rely on this order)</sup>
 * Users can explicitly define which cache provider should be used as the default by calling [CacheApiSettings](https://javadoc.io/doc/io.github.xanthic.cache/cache-core/latest/io/github/xanthic/cache/core/CacheApiSettings.html#setDefaultCacheProvider(io.github.xanthic.cache.api.CacheProvider)). This will override whatever default was chosen from the discovery order
