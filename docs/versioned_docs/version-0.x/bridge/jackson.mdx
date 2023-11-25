@@ -1,0 +1,86 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Alert from '@mui/material/Alert';
+import { JavaDependency } from '@philippheuer/docusaurus-components';
+
+# Jackson Bridge
+
+> added in: Xanthic v0.5.0
+
+> requires: Jackson v2.16+
+
+## Description
+
+Jackson relies upon [caching](https://javadoc.io/static/com.fasterxml.jackson.core/jackson-databind/2.16.0/com/fasterxml/jackson/databind/cfg/CacheProvider.html) during [serialization](https://javadoc.io/static/com.fasterxml.jackson.core/jackson-databind/2.16.0/com/fasterxml/jackson/databind/ser/SerializerCache.html), [deserialization](https://javadoc.io/static/com.fasterxml.jackson.core/jackson-databind/2.16.0/com/fasterxml/jackson/databind/deser/DeserializerCache.html), and [type resolution](https://javadoc.io/static/com.fasterxml.jackson.core/jackson-databind/2.16.0/com/fasterxml/jackson/databind/type/TypeFactory.html).
+
+By default, Jackson relies upon [`LRUMap`](https://github.com/FasterXML/jackson-databind/blob/2.16/src/main/java/com/fasterxml/jackson/databind/util/LRUMap.java),
+which utilizes a [modified](https://github.com/FasterXML/jackson-databind/blob/2.16/src/main/java/com/fasterxml/jackson/databind/util/internal/PrivateMaxEntriesMap.java) [`ConcurrentLinkedHashMap`](https://github.com/ben-manes/concurrentlinkedhashmap) (CLHM) implementation.
+CLHM has not been updated in nearly a decade, and its author suggests alternatives such as [Caffeine](/provider/caffeine3).
+
+This module allows you to easily delegate Jackson's caching to your [preferred Xanthic cache implementation](/provider/).
+
+## Installation
+
+<JavaDependency group="io.github.xanthic.cache" name="cache-jackson" scope="implementation" />
+
+<Alert severity="info" variant="outlined">Versions are managed by the <a href="/getting-started/installation">xanthic-bom</a>!</Alert>
+
+## Usage
+
+When building a Jackson Mapper, simply specify [`cacheProvider`](https://javadoc.io/static/com.fasterxml.jackson.core/jackson-databind/2.16.0/com/fasterxml/jackson/databind/cfg/MapperBuilder.html#cacheProvider-com.fasterxml.jackson.databind.cfg.CacheProvider-) with an instance of [`XanthicJacksonCacheProvider`](https://javadoc.io/doc/io.github.xanthic.cache/cache-jackson/latest/io/github/xanthic/jackson/XanthicJacksonCacheProvider.html).
+
+In addition, you must have a [backing cache implementation](/provider/) on your classpath for Xanthic to utilize.
+
+### Defaults
+
+[`XanthicJacksonCacheProvider`'s default instance](https://javadoc.io/static/io.github.xanthic.cache/cache-jackson/0.5.0/io/github/xanthic/jackson/XanthicJacksonCacheProvider.html#defaultInstance()) uses the recommended maximum cache sizes defined by Jackson developers:
+
+```java
+ObjectMapper mapper = JsonMapper.builder()
+    .cacheProvider(XanthicJacksonCacheProvider.defaultInstance())
+    .build();
+```
+
+Here, Xanthic will use the [default cache provider](/#default-cache-provider)
+stored within [`CacheApiSettings`](https://javadoc.io/doc/io.github.xanthic.cache/cache-core/latest/io/github/xanthic/cache/core/CacheApiSettings.html).
+
+### Custom
+
+Alternatively, you can customize the cache specifications used for the deserializer cache, serializer cache, and type factory.
+
+
+In the simplest case, this customization can take the form of different maximum cache sizes:
+```java
+long deserCapacity = 2048;
+long serCapacity = 4096;
+long typesCapacity = 256;
+
+ObjectMapper mapper = JsonMapper.builder()
+    .cacheProvider(new XanthicJacksonCacheProvider(deserCapacity, serCapacity, typesCapacity))
+    .build();
+```
+
+&nbsp;
+
+Alternatively, your customization can involve more complex adjustments like entry expiry and removal listeners.
+Theoretically, you could even mix-and-match different backing implementations via [`spec.provider`](https://javadoc.io/doc/io.github.xanthic.cache/cache-core/latest/io/github/xanthic/cache/core/CacheApiSpec.html).
+```java
+CacheProvider provider = new XanthicJacksonCacheProvider(
+    // for deserialization
+    spec -> spec.maxSize(2048L)
+        .expiryType(ExpiryType.POST_ACCESS)
+        .expiryTime(Duration.ofMinutes(4)),
+    // for serialization
+    spec -> spec.maxSize(4096L)
+        .expiryType(ExpiryType.POST_WRITE)
+        .expiryTime(Duration.ofMinutes(5)),
+    // for type factory
+    spec -> spec.maxSize(256L)
+        .removalListener((key, value, cause) -> {})
+);
+
+ObjectMapper mapper = JsonMapper.builder()
+    .cacheProvider(provider)
+    .build();
+```
+<Alert severity="info" variant="outlined">This example is simply included for illustration purposes (and may not be optimally parameterized for your use case).</Alert>
