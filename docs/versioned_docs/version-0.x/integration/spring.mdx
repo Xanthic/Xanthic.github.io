@@ -27,8 +27,8 @@ Configure a [`CacheManager`](https://docs.spring.io/spring-framework/docs/6.1.0/
 
 The [`XanthicSpringCacheManager`](https://javadoc.io/doc/io.github.xanthic.cache/cache-spring-java17/latest/io/github/xanthic/cache/springjdk17/XanthicSpringCacheManager.html) supports the following modes of operation:
 
-- [dynamic](#cachemanager-dynamic): Caches are created on demand with the default configuration or can be registered manually.
-- [static](#cachemanager-static): The manually provided cache names are registered on startup and no further caches can be registered.
+- [Dynamic](#cachemanager-dynamic): Caches are created on demand with the default configuration or can be registered manually.
+- [Static](#cachemanager-static): The manually provided cache names are registered on startup and no further caches can be registered.
 
 <Alert severity="info" variant="outlined">Please ensure that you have a [backing cache implementation](/provider/) on your classpath for Xanthic to utilize.</Alert>
 
@@ -53,7 +53,7 @@ public class CachingConfig {
 
 #### Manually Register Caches
 
-The following shows how to manually create a cache with custom settings:
+The following snippet shows how to manually create a cache with custom settings:
 
 ```java
 @Autowired
@@ -70,7 +70,7 @@ public void registerCache() {
 
 #### Dynamic Creation
 
-If you refer a non-existing cache name from the Spring Cache Abstraction, for example the `@Cacheable` annotation, the [`XanthicSpringCacheManager`](https://javadoc.io/doc/io.github.xanthic.cache/cache-spring-java17/latest/io/github/xanthic/cache/springjdk17/XanthicSpringCacheManager.html) will create a new cache with the default settings provided in the spec.
+If you refer to a non-existing cache name from the Spring Cache Abstraction, for example the `@Cacheable` annotation, the [`XanthicSpringCacheManager`](https://javadoc.io/doc/io.github.xanthic.cache/cache-spring-java17/latest/io/github/xanthic/cache/springjdk17/XanthicSpringCacheManager.html) will create a new cache with the default settings provided in the spec.
 
 ```java
 @Cacheable("customer-cache")
@@ -82,11 +82,11 @@ public Customer getCustomerById(Long id) {
 For more information about the Spring Cache Abstraction, please refer to the following resources:
 
 - [Spring's documentation](https://docs.spring.io/spring-framework/reference/integration/cache.html)
-- [baeldung.com/spring-cache-tutorial](https://www.baeldung.com/spring-cache-tutorial)
+- [Baeldung's "A Guide To Caching in Spring"](https://www.baeldung.com/spring-cache-tutorial)
 
 ### Static {#cachemanager-static}
 
-#### Configure the [`XanthicSpringCacheManager`](https://javadoc.io/doc/io.github.xanthic.cache/cache-spring-java17/latest/io/github/xanthic/cache/springjdk17/XanthicSpringCacheManager.html)
+#### Configure the [`XanthicSpringCacheManager`](https://javadoc.io/doc/io.github.xanthic.cache/cache-spring-java17/latest/io/github/xanthic/cache/springjdk17/XanthicSpringCacheManager.html) with explicit cache names
 
 ```java
 @Configuration
@@ -105,4 +105,4 @@ public class CachingConfig {
 }
 ```
 
-The list of cache names provided in the constructor needs to be complete, no further caches can be registered at runtime.
+The list of cache names provided in the constructor needs to be exhaustive within static mode, as no further caches can be registered at runtime.
