@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[997],{7070:e=>{e.exports=JSON.parse('{"title":"Integrations","slug":"/category/integrations","permalink":"/category/integrations","navigation":{"previous":{"title":"Infinispan","permalink":"/provider/infinispan"},"next":{"title":"Jackson","permalink":"/integration/jackson"}}}')}}]);
